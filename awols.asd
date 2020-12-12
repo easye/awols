@@ -1,11 +1,9 @@
 ;;; -*- Mode: LISP; Syntax: COMMON-LISP -*-
-#-abcl (error "You need the Bear for this one")
-(defsystem "awols"
-  :version "0.1.0"
+(defsystem awols
+  :version "0.1.1"
   :author "Mark Evenson"
   :license "BSD 2-CLAUSE"
-  :depends-on (dexador
-	       jeannie)
+  :depends-on (dexador)	       
   :components ((:module package
 			:pathname "src/"
 		:components ((:file "package")))
@@ -13,15 +11,18 @@
 		:pathname "src/"
 		:depends-on (package)
                 :components ((:file "main"))))
-  :description "Introspecting AWS endpoints into RDF"
+  :description "Introspecting AWS endpoints."
   :in-order-to ((test-op (test-op "awols/t"))))
 
-(defsystem "awols/t"
+(defsystem awols/t
   :defsystem-depends-on (prove-asdf)
   :depends-on (awols
-              prove)
+               prove)
   :components ((:module "t"
                 :components
                 ((:test-file "main"))))
   :description "Test system for awols"
   :perform (test-op (op c) (symbol-call :prove :run c)))
+
+(defsystem awols/rdf
+  :depends-on (jeannie))
