@@ -20,7 +20,7 @@
 (defun index (&key (uri *root*))
   (let ((endpoints (transcribe uri)))
     (loop :for item :in (split-sequence:split-sequence #\newline endpoints)
-	  :if (#"endsWith" item "/")
+	  :if (eq #\\ (1- (length item)))
 	    :collect (index :uri (concatenate 'string uri item))
 	  :else 
 	    :collect `(,item . ,(transcribe (concatenate 'string uri item))))))
