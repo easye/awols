@@ -1,0 +1,4 @@
+* Awols 
+
+Introspect AWS instance information
+
