@@ -17,10 +17,11 @@
        :unhandled-error)))
 
 (defun index (&key (uri *root*))
+  "Retrieve the sexpr representation of AWS EC2 instance-metadata"
   (let ((endpoints (representation-of uri)))
     (loop :for item :in (split-sequence:split-sequence #\newline endpoints)
 	  :if (eq #\/ (char item (1- (length item))))
-	    :collect (index :uri (concatenate 'string uri item))
+	    :collect `(,item . ,(index :uri (concatenate 'string uri item)))
 	  :else 
 	    :collect `(,item . ,(representation-of (concatenate 'string uri item))))))
 

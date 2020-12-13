@@ -2,3 +2,30 @@
 
 Introspect AWS instance information
 
+* Usage
+
+1. Obtain an Armed Bear Common Lisp <https://abcl.org/releases/>.
+
+2. Install Jeannie <https://github.com/easye/jeannie> somewhere ASDF
+   can find it, like under <file:~/common-lisp/>.
+
+3. From an Amazon AWS host for which the EC2 instance-metadata
+   link-local is available at =tcp4:169.254.169.254:http=
+   <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html>
+
+#+begin_src lisp
+(asdf:make :awols/rdf)
+;; returns the raw data as s-epxr
+(index) 
+;; returns the corresponding RDF model
+(jeannie:list-statements (introspect))
+#+end_src
+
+
+* Colophon
+
+  #+begin_example
+  Mark Evenson
+  Created: 12-DEC-2020
+  Revised: <2020-12-13 Sun 09:16>
+  #+end_example
