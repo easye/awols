@@ -15,17 +15,16 @@ Introspect AWS instance information
 
 #+begin_src lisp
 (asdf:make :awols/rdf)
-;; returns the raw data as s-epxr
-(index) 
-;; returns the corresponding RDF model
-(jeannie:list-statements (introspect))
+;;; returns the raw data as s-epxr
+(awols:index) 
+;;; returns the corresponding RDF model
+(jeannie:list-statements (awols:introspect))
 #+end_src
-
 
 * Colophon
 
   #+begin_example
   Mark Evenson
   Created: 12-DEC-2020
-  Revised: <2020-12-13 Sun 09:16>
+  Revised: <2020-12-13 Sun 09:25>
   #+end_example
