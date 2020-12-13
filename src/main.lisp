@@ -6,8 +6,7 @@
 (defparameter *verbose*
   *standard-output*)
 
-
-(defun transcribe (uri)
+(defun representation-of (uri)
   (handler-case 
       (dex:get uri)
     (dexador.error:http-request-not-found (e)
@@ -18,12 +17,12 @@
        :unhandled-error)))
 
 (defun index (&key (uri *root*))
-  (let ((endpoints (transcribe uri)))
+  (let ((endpoints (representation-of uri)))
     (loop :for item :in (split-sequence:split-sequence #\newline endpoints)
 	  :if (eq #\/ (char item (1- (length item))))
 	    :collect (index :uri (concatenate 'string uri item))
 	  :else 
-	    :collect `(,item . ,(transcribe (concatenate 'string uri item))))))
+	    :collect `(,item . ,(representation-of (concatenate 'string uri item))))))
 
 
 						       

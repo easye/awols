@@ -19,10 +19,14 @@
   :depends-on (awols
                prove)
   :components ((:module "t"
-                :components
-                ((:test-file "main"))))
+                :components ((:test-file "main"))))
   :description "Test system for awols"
   :perform (test-op (op c) (symbol-call :prove :run c)))
 
 (defsystem awols/rdf
-  :depends-on (jeannie))
+  :depends-on (awols
+	       jeannie) ;; <git+https://github.com/easye/jeannie.git>
+  :components ((:module main
+		:pathname "src/"
+		:components ((:file "rdf")))))
+  
